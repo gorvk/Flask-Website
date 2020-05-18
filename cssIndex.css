@@ -1,0 +1,68 @@
+body
+{
+    margin: 0%;
+    background-color: rgb(189, 4, 4);
+    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    
+}
+header
+{
+    text-align: center;
+    color: white;
+    font-size: 500%;
+    background-color: rgba(125, 0, 0, 0.95);
+    padding-top: 7.5%;
+    padding-bottom: 8.5%;
+    position:fixed;
+    top: 0%;
+    width: 100%;
+}
+.sBody
+{
+    background-color: white;
+    padding: 5.5%;
+    padding-bottom: 15.7%;
+    margin: 9%;
+    margin-top: 38%;
+    border-radius: 100px;
+}
+.intro
+{
+    font-size: 420%;
+    text-align: center;
+}
+.instruct
+{
+    font-size: 173%;
+    text-align: left;
+}
+.instruct > li
+{
+    margin-bottom: 10%;
+}
+.userName
+{
+    width: 75%;
+    height: 7%;
+    margin-left: 12%;
+    border:none;
+    border-bottom: 5px solid red;
+    outline: none;
+    font-size: 380%;
+}
+.userName::placeholder
+{
+    text-align: center;
+}
+.btn
+{
+    width: 50%;
+    height: 8%;
+    margin-top: 10%;
+    margin-left: 25%;
+    background-color: brown;
+    color: white;
+    font-size: 300%;
+    font-family: cursive;
+    font-weight: bold;
+}
