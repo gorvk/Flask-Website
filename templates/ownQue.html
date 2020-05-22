@@ -1,0 +1,27 @@
+{% extends "layout.html" %}
+{% block content %}
+<form method="POST" action="">
+    {{ form.hidden_tag() }}
+    {{ form.question(class="userName",
+                     placeholder='Enter your question',
+                     style='margin-left:0%;margin-top:20%;margin-bottom:35%;width:100%') }} 
+    {{ form.option_1(class="userName",
+                     placeholder='option 1',
+                     style='margin-bottom:15%;') }}   
+    {{ form.option_2(class="userName",
+                     placeholder='option 2',
+                     style='margin-bottom:15%;') }}
+    {{ form.option_3(class="userName",
+                     placeholder='option 3',
+                     style='margin-bottom:15%;') }}
+    {{ form.option_4(class="userName",
+                     placeholder='option 4',
+                     style='margin-bottom:15%;') }}
+    <div>
+        {{ form.submitReady(class="btn", style="padding: 5%;") }}
+    <div>
+    <div>
+        {{ form.done(class="btn", style="padding: 5%;") }}
+    </div>
+</form>
+{% endblock content %}

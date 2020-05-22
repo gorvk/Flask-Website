@@ -1,0 +1,32 @@
+{% extends "layout.html" %}
+{% block content %}
+<style>
+    ul{
+        list-style-type: none;
+    }
+    input[type=radio]
+    {
+        width: 60px;
+        height: 60px;
+        margin-top:15%;
+        margin-left: -10%;
+    }
+</style>
+    <!-- {{ form.hidden_tag() }} -->
+    <p style="margin-top:12%">
+        {{ form.question.label(class="userName", style='width:1%; border:none;margin:0%;') }} 
+    </p>
+    <div class="userName" style="border:none;margin-top:15%; ">
+        {{ form.option }}
+    </div>   
+    <div style="margin-top: 80%;">
+        {{ form.submitReady(class="btn", style="padding: 5%;") }}
+    </div>
+    <div>
+        {{ form.skip(class="btn", style="padding: 5%;") }}
+    </div>    
+    <div>
+        {{ form.done(class="btn", style="padding: 5%;") }}
+    </div>
+</form>
+{% endblock content %}

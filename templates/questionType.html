@@ -1,22 +1,24 @@
-<!DOCTYPE> 
-<html>
-<head>
-    <title>Question types</title>
-    <link rel="stylesheet" href="../static/cssIndex.css">
-    <link rel="stylesheet" href="../static/cssQue.css">
-</head>
-<body>
-    <header><b>Who Knows Me Better</b></header>
-    <div class="sBody">
-        <form method="POST" action="">
-            {{ _form1.hidden_tag() }}
-            {{ _form1.submitOwn(class="btn") }}
-        </form>
+{% extends "layout.html" %}
+{% block content %}
+    <title>Type of Question</title>
+    <style>
+        .sBody
+        {
+            margin-top: 55%;
+        }
+        .btn
+        {
+            width:95%;
+            margin-left:2.5%;
+        }
+    </style>
+    <form method="POST" action="">
+        {{ form1.hidden_tag() }}
+        {{ form1.submitOwn(class="btn") }}
+    </form>
 
-        <form method="POST" action="">
-            {{ _form2.hidden_tag() }}
-            {{ _form2.submitReady(class="btn") }}
-        </form>    
-    </div>    
-</body>
-</html>
+    <form method="POST" action="">
+        {{ form2.hidden_tag() }}
+        {{ form2.submitReady(class="btn") }}
+    </form>
+{% endblock content %}

@@ -1,5 +1,5 @@
 from flask import Flask, render_template, redirect, flash
-from form import RegisterName, OwnTypeForm, ReadyTypeForm
+from form import RegisterName, SubmitOwn, SubmitReady, OwnMade, ReadMade
 from flask.helpers import url_for
 
 app = Flask(__name__)
@@ -14,22 +14,32 @@ def index():
 
 @app.route('/questionType', methods = ['GET', 'POST'])
 def questionType():
-    _form1 = OwnTypeForm()
-    _form2 = ReadyTypeForm()
+    form1 = SubmitOwn()
+    form2 = SubmitReady()
     
-    if _form1.submitOwn.data:
+    if form1.submitOwn.data:
         return redirect(url_for('ownQue'))
-    if _form2.submitReady.data:
+    if form2.submitReady.data:
         return redirect(url_for('readyMadeQue'))
-    return render_template('questionType.html', _form1 = _form1, _form2 = _form2)
+    return render_template('questionType.html', form1 = form1, form2 = form2)
 
-@app.route('/ownQue')
+@app.route('/ownQue', methods = ['GET', 'POST'])
 def ownQue():
-    return render_template('ownQue.html')
+    form = OwnMade()
+    if form.done.data:
+        return redirect(url_for('shareQuiz'))
+    return render_template('ownQue.html', form = form)
 
-@app.route('/readyMadeQue')
+@app.route('/readyMadeQue', methods = ['GET', 'POST'])
 def readyMadeQue():
-    return render_template('readyMadeQue.html')
+    form = ReadMade()
+    if form.done.data:
+        return redirect(url_for('shareQuiz'))
+    return render_template('readyMadeQue.html', form = form)
+
+@app.route('/shareQuiz')
+def shareQuiz():
+    return render_template('shareQuiz.html')
 
 if __name__ == '__main__':
     app.run(debug = True)
