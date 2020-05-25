@@ -19,8 +19,8 @@
                 </li>
             </ul>
             <form method="POST" action="">
-                {{ _form.hidden_tag() }}
-                {{ _form.userName(class="userName", placeholder="Enter Your Name") }} 
-                {{ _form.submit(class="btn") }}   
+                {{ form.hidden_tag() }}
+                {{ form.userName(class="userName", placeholder="Enter Your Name") }} 
+                {{ form.submit(class="btn") }}   
             </form>  
         {% endblock content%} 
