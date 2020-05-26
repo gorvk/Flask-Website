@@ -1,13 +1,21 @@
 from flask import render_template, redirect
-from quizApp import app
+from quizApp import app, db
 from quizApp.form import RegisterName, SubmitOwn, SubmitReady, OwnMade, ReadyMade
 from quizApp.model import Users, Q_A
 from flask.helpers import url_for
+from flask_login import login_user, current_user, logout_user
 
 @app.route('/', methods = ['GET', 'POST'])
+@app.route('/index', methods = ['GET', 'POST'])
 def index():
+    if current_user.is_authenticated:
+        return redirect(url_for('questionType'))
     form = RegisterName()
     if form.validate_on_submit():
+        user = Users(name = form.userName.data)
+        db.session.add(user)
+        db.session.commit()
+        login_user(user, remember = True)
         print(f"Username : {form.userName.data}")
         return redirect(url_for('questionType'))
     return render_template('index.html', form = form)
@@ -51,3 +59,8 @@ def readyMadeQue():
 @app.route('/shareQuiz')
 def shareQuiz():
     return render_template('shareQuiz.html')
+
+@app.route('/logout')
+def logout():
+    logout_user()
+    return redirect(url_for('index'))

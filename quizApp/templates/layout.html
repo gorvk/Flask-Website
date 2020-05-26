@@ -4,8 +4,24 @@
     <link rel="stylesheet" href="../static/cssIndex.css">
 </head>
 <body>
-    <header><b>Who Knows Me Better</b></header>
+    
+    <header>
+        <div>
+            <b>
+                Who Knows Me Better
+            </b>
+        </div>
+        {% if current_user.is_authenticated %}
+            <div style=" margin-left: 78%; margin-top: 10%; margin-bottom: -17%;">
+                <a style="background-color: maroon; text-decoration: none;padding: 8%; font-size: 55%; font-weight: bold; color: white;" href="{{ url_for('logout') }}">
+                    Logout
+                </a>
+            </div>
+        {% endif %}
+    </header>
+    
     <div class="sBody">
+       
         {% block content %}  
         {% endblock content%}  
     </div>    

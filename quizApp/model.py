@@ -1,13 +1,20 @@
-from quizApp import db
+from quizApp import db, login_manager
+from flask_login import UserMixin
 
-class Users(db.Model):
+@login_manager.user_loader
+def laod_user(userID):
+    return Users.query.get(int(userID))
+
+class Users(db.Model, UserMixin):
     userID = db.Column(db.Integer, nullable = False, primary_key = True)
     name = db.Column(db.String, nullable = False)
     QAs = db.relationship('Q_A', backref = 'U_ID', lazy = True) 
+    def get_id(self):
+        return (self.userID)
     def __repr__(self):
         return f'User("{self.userID}", "{self.name}")'
 
-class Q_A(db.Model):
+class Q_A(db.Model, UserMixin):
     userID = db.Column(db.Integer, db.ForeignKey('users.userID'), nullable = False)
     QAid = db.Column(db.Integer, nullable = False, primary_key = True)
     questions = db.Column(db.String, nullable = False)
