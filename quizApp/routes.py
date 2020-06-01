@@ -3,7 +3,7 @@ from quizApp import app, db
 from quizApp.form import RegisterName, SubmitOwn, SubmitReady, OwnMade, ReadyMade
 from quizApp.model import Users, Q_A
 from flask.helpers import url_for
-from flask_login import login_user, current_user, logout_user
+from flask_login import login_user, current_user, logout_user, login_required
 
 @app.route('/', methods = ['GET', 'POST'])
 @app.route('/index', methods = ['GET', 'POST'])
@@ -21,6 +21,7 @@ def index():
     return render_template('index.html', form = form)
 
 @app.route('/questionType', methods = ['GET', 'POST'])
+@login_required
 def questionType():
     form1 = SubmitOwn()
     form2 = SubmitReady()
@@ -32,17 +33,23 @@ def questionType():
     return render_template('questionType.html', form1 = form1, form2 = form2)
 
 @app.route('/ownQue', methods = ['GET', 'POST'])
+@login_required
 def ownQue():
     form = OwnMade()
     if form.validate_on_submit() and form.done.data:
         print(f"Question : {form.question.data}\nOptions : {form.option_1.data},  {form.option_2.data}, {form.option_3.data}, {form.option_4.data}")
         return redirect(url_for('shareQuiz'))
     elif form.validate_on_submit() and form.nxt.data:
+        QnA = Q_A(U_ID = current_user , questions = form.question.data, option1 = form.option_1.data, option2 = form.option_2.data, option3 = form.option_3.data, option4 = form.option_4.data)
+        db.session.add(QnA)
+        db.session.commit()
+        print('ID : ', current_user.userID)
         print(f"Question : {form.question.data}\nOptions : {form.option_1.data},  {form.option_2.data}, {form.option_3.data}, {form.option_4.data}")
         return redirect(url_for('ownQue'))
     return render_template('ownQue.html', form = form)
 
 @app.route('/readyMadeQue', methods = ['GET', 'POST'])
+@login_required
 def readyMadeQue():
     form = ReadyMade()
     if form.validate_on_submit() and form.done.data:
@@ -57,6 +64,7 @@ def readyMadeQue():
     return render_template('readyMadeQue.html', form = form)
 
 @app.route('/shareQuiz')
+@login_required
 def shareQuiz():
     return render_template('shareQuiz.html')
 

@@ -7,5 +7,6 @@ app.config['SECRET_KEY'] = 'gstar1525'
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///site.db'
 db = SQLAlchemy(app)
 login_manager = LoginManager(app)
+login_manager.login_view = 'index'
 
 from quizApp import routes

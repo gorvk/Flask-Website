@@ -6,7 +6,7 @@ def laod_user(userID):
     return Users.query.get(int(userID))
 
 class Users(db.Model, UserMixin):
-    userID = db.Column(db.Integer, nullable = False, primary_key = True)
+    userID = db.Column(db.Integer, nullable = False, primary_key = True, autoincrement = True)
     name = db.Column(db.String, nullable = False)
     QAs = db.relationship('Q_A', backref = 'U_ID', lazy = True) 
     def get_id(self):
@@ -15,8 +15,8 @@ class Users(db.Model, UserMixin):
         return f'User("{self.userID}", "{self.name}")'
 
 class Q_A(db.Model, UserMixin):
-    userID = db.Column(db.Integer, db.ForeignKey('users.userID'), nullable = False)
-    QAid = db.Column(db.Integer, nullable = False, primary_key = True)
+    user_ID = db.Column(db.Integer, db.ForeignKey('users.userID'), nullable = False)
+    QAid = db.Column(db.Integer, nullable = False, primary_key = True, autoincrement = True)
     questions = db.Column(db.String, nullable = False)
     option1 = db.Column(db.String, nullable = False)
     option2 = db.Column(db.String, nullable = False)
