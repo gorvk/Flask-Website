@@ -1,10 +1,10 @@
 {% extends "layout.html" %}
 
 {% block content %}
+	<title>ScoreBoard</title>
 	<div class="sBody" style = 'background-color:#ff8787; text-align:center; margin: 5% -2% 10% -2%; border-radius:70px; padding:13%;'>
 		<b style="font-size:300%">ScoreBoard</b>  
 	</div>
-    <title>Share page</title>
 	<ol style="font-size:300%">
 		{% for qa in QAs %}
 			<li><h1>{{ qa.questions }}</h1></li>
@@ -13,10 +13,9 @@
 				<li><h2>{{ qa.option2 }}</h2></li>
 				<li><h2>{{ qa.option3 }}</h2></li>
 				<li><h2>{{ qa.option4 }}</h2></li>
-				<li><h2>{{ qa.answer }}</h2></li>
 				</ol>
 				<br>
 		{% endfor %}
 	</ol>
-	<input class="userName" type="text" value="http://127.0.0.1:5000/playQuiz/{{ c_userID }}">
+	<a href="{{ url_for('logout') }}"><input class="btn" style="width:85%; margin-left: 7%;" type="button" value="Create your Own Quiz"></a>
 {% endblock content %}

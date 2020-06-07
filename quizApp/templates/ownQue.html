@@ -1,5 +1,17 @@
 {% extends "layout.html" %}
 {% block content %}
+<style>
+    ul{
+        list-style-type: none;
+    }
+    [type=radio]
+    {
+        width: 60px;
+        height: 60px;
+        margin-top:15%;
+        margin-left: -10%;
+    }
+</style>
 <form method="POST" action="">
     {{ form.hidden_tag() }}
     {{ form.question(class="userName",
@@ -17,9 +29,14 @@
     {{ form.option_4(class="userName",
                      placeholder='option 4',
                      style='margin-bottom:15%;') }}
-    <div>
+    
+    <div class="userName" style="border:none;margin-top:15%;">
+        <b>Select Your Answer :</b>
+        {{ form.answer }}
+    </div>
+    <div style="margin-top: 100%;">
         {{ form.nxt(class="btn", style="padding: 5%;") }}
-    <div>
+    </div>
     <div>
         {{ form.done(class="btn", style="padding: 5%;") }}
     </div>

@@ -49,6 +49,7 @@ header
     border-bottom: 5px solid red;
     outline: none;
     font-size: 380%;
+    text-align: center;
 }
 .userName::placeholder
 {

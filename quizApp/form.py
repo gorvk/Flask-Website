@@ -14,7 +14,7 @@ class SubmitReady(FlaskForm):
 
 class ReadyMade(FlaskForm):
     question = StringField("What is gourav's fav Color ?")
-    option = RadioField('OPTION NO 1', choices=[(1, 'OPTION NO 1'), (2, 'OPTION NO 2'), (3, 'OPTION NO 3'), (4, 'OPTION NO 4')], default=None, coerce=int, validators=[InputRequired()])
+    option = RadioField('option', choices=[(1, 'OPTION NO. 1'), (2, 'OPTION NO. 2'), (3, 'OPTION NO. 3'), (4, 'OPTION NO. 4')], default=None, coerce=int, validators=[InputRequired()])
     submitReady = SubmitField('SUBMIT')
     skip = SubmitField('SKIP')
     done = SubmitField('DONE')
@@ -25,5 +25,9 @@ class OwnMade(FlaskForm):
     option_2 = StringField(validators=[DataRequired()])
     option_3 = StringField(validators=[DataRequired()])
     option_4 = StringField(validators=[DataRequired()])
+    answer = RadioField('option', choices=[(1, 'OPTION NO 1'), (2, 'OPTION NO 2'), (3, 'OPTION NO 3'), (4, 'OPTION NO 4')], default=None, coerce=int, validators=[DataRequired()])
     nxt = SubmitField('NEXT')
     done = SubmitField('DONE')
+
+class PlayQuiz(FlaskForm):
+    nxt = SubmitField('NEXT')

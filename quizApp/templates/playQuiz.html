@@ -1,0 +1,38 @@
+{% extends "layout.html" %}
+
+{% block content %}
+	<style>
+		[type=radio]
+		{
+			width: 60px;
+			height: 60px;
+			margin-top:15%;
+			margin-left: -10%;
+		}
+	</style>
+	<div class="sBody" style = 'background-color:#ff8787; text-align:center; margin: 5% -2% 10% -2%; border-radius:70px; padding:13%;'>
+	<b style="font-size:300%">ScoreBoard</b>  
+	</div>
+	<title>Play Quiz page</title>
+	<form method="POST" action="">
+		{{ form.hidden_tag() }}
+		<input type="text" class="username" placeholder="Enter Your Name" style="text-align: center;">
+		<ol style="font-size:300%">
+			{% for i in range(nQA) %}
+			<li>
+				<h1>{{ qa[i].questions }}</h1>
+			</li>
+			<ol>
+				<div>
+					<li style="list-style-type: none;"><input type="radio" name="{{ i }}" value="1"><b>{{ qa[i].option1 }}</b></li>
+					<li style="list-style-type: none;"><input type="radio" name="{{ i }}" value="2"><b>{{ qa[i].option2 }}</b></li>
+					<li style="list-style-type: none;"><input type="radio" name="{{ i }}" value="3"><b>{{ qa[i].option3 }}</b></li>
+					<li style="list-style-type: none;"><input type="radio" name="{{ i }}" value="4"><b>{{ qa[i].option4 }}</b></li>
+				</div>
+			</ol>	
+			{% endfor %}
+			<br>
+		</ol>
+		{{ form.nxt(class='btn') }}
+	</form>
+{% endblock content %}

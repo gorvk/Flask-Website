@@ -22,7 +22,9 @@ class Q_A(db.Model, UserMixin):
     option2 = db.Column(db.String, nullable = False)
     option3 = db.Column(db.String, nullable = False)
     option4 = db.Column(db.String, nullable = False)
-    
-
+    answer = db.Column(db.String, nullable = False)
+    def get_id(self):
+        return (self.user_ID)
     def __repr__(self):
         return f'Q_A({self.questions}, {self.option1}, {self.option2}, {self.option3}, {self.option4})'
+ 

@@ -1,6 +1,6 @@
-from flask import render_template, redirect
+from flask import render_template, redirect, request
 from quizApp import app, db
-from quizApp.form import RegisterName, SubmitOwn, SubmitReady, OwnMade, ReadyMade
+from quizApp.form import RegisterName, SubmitOwn, SubmitReady, OwnMade, ReadyMade, PlayQuiz
 from quizApp.model import Users, Q_A
 from flask.helpers import url_for
 from flask_login import login_user, current_user, logout_user, login_required
@@ -16,7 +16,6 @@ def index():
         db.session.add(user)
         db.session.commit()
         login_user(user, remember = True)
-        print(f"Username : {form.userName.data}")
         return redirect(url_for('questionType'))
     return render_template('index.html', form = form)
 
@@ -37,14 +36,14 @@ def questionType():
 def ownQue():
     form = OwnMade()
     if form.validate_on_submit() and form.done.data:
-        print(f"Question : {form.question.data}\nOptions : {form.option_1.data},  {form.option_2.data}, {form.option_3.data}, {form.option_4.data}")
-        return redirect(url_for('shareQuiz'))
-    elif form.validate_on_submit() and form.nxt.data:
-        QnA = Q_A(U_ID = current_user , questions = form.question.data, option1 = form.option_1.data, option2 = form.option_2.data, option3 = form.option_3.data, option4 = form.option_4.data)
+        QnA = Q_A(U_ID = current_user , questions = form.question.data, option1 = form.option_1.data, option2 = form.option_2.data, option3 = form.option_3.data, option4 = form.option_4.data, answer = form.answer.data)
         db.session.add(QnA)
         db.session.commit()
-        print('ID : ', current_user.userID)
-        print(f"Question : {form.question.data}\nOptions : {form.option_1.data},  {form.option_2.data}, {form.option_3.data}, {form.option_4.data}")
+        return redirect(url_for('shareQuiz'))
+    elif form.validate_on_submit() and form.nxt.data:
+        QnA = Q_A(U_ID = current_user , questions = form.question.data, option1 = form.option_1.data, option2 = form.option_2.data, option3 = form.option_3.data, option4 = form.option_4.data, answer = form.answer.data)
+        db.session.add(QnA)
+        db.session.commit()
         return redirect(url_for('ownQue'))
     return render_template('ownQue.html', form = form)
 
@@ -53,20 +52,33 @@ def ownQue():
 def readyMadeQue():
     form = ReadyMade()
     if form.validate_on_submit() and form.done.data:
-        print(f"Question : {form.question.label}\nOptions : {form.option.data}")
         return redirect(url_for('shareQuiz'))
     elif form.validate_on_submit() and form.submitReady.data:
-        print(f"Question : {form.question.label}\nOptions : {form.option.data}")
         return redirect(url_for('readyMadeQue'))
     elif form.validate_on_submit() and form.skip.data:
-        print(f"Question : {form.question.label}\nOptions : {form.option.data}")
         return redirect(url_for('readyMadeQue'))
     return render_template('readyMadeQue.html', form = form)
 
 @app.route('/shareQuiz')
 @login_required
 def shareQuiz():
-    return render_template('shareQuiz.html')
+    QAs = Q_A.query.filter_by(user_ID = current_user.userID).all()
+    c_userID = current_user.userID
+    return render_template('shareQuiz.html', QAs = QAs, c_userID = c_userID)
+    
+@app.route('/playQuiz/<_UID>', methods = ['GET', 'POST'])
+def playQuiz(_UID):
+    form = PlayQuiz()
+    qa = Q_A.query.filter_by(user_ID = _UID).all()
+    nQA = len(qa)
+    if form.validate_on_submit() and form.nxt.data:
+        return redirect(url_for('scoreBoard', _UID = _UID))
+    return render_template('playQuiz.html', nQA = nQA, qa = qa, form = form) 
+
+@app.route('/scoreBoard/<_UID>', methods = ['GET', 'POST'])
+def scoreBoard(_UID):
+    QAs = Q_A.query.filter_by(user_ID = _UID).all()
+    return render_template('scoreBoard.html', QAs = QAs)
 
 @app.route('/logout')
 def logout():
