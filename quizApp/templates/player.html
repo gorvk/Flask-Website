@@ -1,0 +1,13 @@
+{% extends "layout.html" %}
+        {% block content %}
+            <title>Who Knows Me Better - Enter your player name</title>
+            <h2 style="text-align: center; font-size: 450%; margin-left:-8%; margin-right:-8%; background-color: #8000003b;padding: 5%;">Player Name</h2>
+            <p class="intro">
+                Enter your name : <br>
+            </p>
+            <form method="POST" action="">
+                {{ form.hidden_tag() }}
+                {{ form.playerName(class="userName", placeholder="Name") }} 
+                {{ form.play(class="btn") }}   
+            </form>  
+        {% endblock content%} 

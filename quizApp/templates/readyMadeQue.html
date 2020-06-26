@@ -1,33 +1,67 @@
 {% extends "layout.html" %}
 {% block content %}
 <style>
-    ul{
-        list-style-type: none;
-    }
-    [type=radio]
+    .container 
     {
-        width: 60px;
-        height: 60px;
-        margin-top:15%;
-        margin-left: -10%;
+        display: block;
+        position: relative;
+        padding-left: 35px;
+        margin-top: 60px;
+        margin-left: 1%;
+        padding-right: 0%;
+        padding-top: 7%;
+        font-size: 94%;
+        height: 3%;
+        border: 5px solid red;
+        border-radius: 50px;
+    }
+    .container input[type = radio] 
+    {
+        opacity: 0;
+    }
+    .checkmark
+    {
+        position: absolute;
+        top: -5%;
+        left: 0;
+        height: 25px;
+        width: 25px;
+        border-radius: 0%;
+    }
+    input:checked ~ .checkmark {
+    background-color: #ff000054;
+    width: 100%;
+    height: 108%;
+    border-radius: 50px;
+    }
+    label
+    {
+        padding: 8% 16% 7% 17%;
+        margin-left: -9%
     }
 </style>
-<form method="POST" action="">
+<title>Who Knows Me Better - Readymade Questions</title>
+<h2 style="text-align: center; font-size: 450%; margin-left:-8%; margin-right:-8%; background-color: #8000003b;padding: 5%;">Select Your Answer for Questions</h2>
+<form method="POST">
     {{ form.hidden_tag() }}
-    <p style="margin-top:12%">
-        {{ form.question.label(class="userName", style='width:1%; border:none;margin:0%;') }} 
-    </p>
-    <div class="userName" style="border:none;margin-top:15%; ">
-        {{ form.option }}
-    </div>   
-    <div style="margin-top: 80%;">
-        {{ form.submitReady(class="btn", style="padding: 5%;") }}
+    
+    {% for rm in readymade.items %}
+    <div style="font-size:300%">
+        <h1> {{ rm.questions }} </h1>
     </div>
-    <div>
-        {{ form.skip(class="btn", style="padding: 5%;") }}
-    </div>    
-    <div>
-        {{ form.done(class="btn", style="padding: 5%;") }}
+    <div style="font-size:300%;">
+        <label class="container" for="option1"><input id="option1" type="radio" name="options" value="1" required><b>{{ rm.option1 }}</b><span class="checkmark"></span></label>
+        <label class="container" for="option2"><input id="option2" type="radio" name="options" value="2" required><b>{{ rm.option2 }}</b><span class="checkmark"></span></label>
+        <label class="container" for="option3"><input id="option3" type="radio" name="options" value="3" required><b>{{ rm.option3 }}</b><span class="checkmark"></span></label>
+        <label class="container" for="option4"><input id="option4" type="radio" name="options" value="4" required><b>{{ rm.option4 }}</b><span class="checkmark"></span></label>    
     </div>
+    {% endfor %}
+    {% for page_num in readymade.iter_pages()%}
+        {% if page_num == (readymade.page + 1) %}
+            {{ form.submit(class = 'btn', style="margin-bottom: 15%; margin-top:18%;") }}
+            <a class="btn" style=" text-decoration: none;padding: 7% 17%; margin-left: 25%;" href="{{ url_for('readyMadeQue', page=page_num) }}">SKIP</a>
+        {% endif %}
+    {% endfor %}
+    {{ form.done(class = 'btn', style="margin-top: 15%;") }}
 </form>
 {% endblock content %}

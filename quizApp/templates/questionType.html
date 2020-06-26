@@ -1,6 +1,6 @@
 {% extends "layout.html" %}
 {% block content %}
-    <title>Type of Question</title>
+    <title>Who Knows Me Better - Type of Question</title>
     <style>
         .sBody
         {
@@ -12,6 +12,7 @@
             margin-left:2.5%;
         }
     </style>
+    <h2 style="text-align: center; font-size: 450%; margin-left:-8%; margin-right:-8%; background-color: #8000003b;padding: 5%;">Select Question type for your Quiz</h2>
     <form method="POST" action="">
         {{ form1.hidden_tag() }}
         {{ form1.submitOwn(class="btn") }}

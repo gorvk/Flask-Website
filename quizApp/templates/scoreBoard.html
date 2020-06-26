@@ -1,21 +1,56 @@
 {% extends "layout.html" %}
 
 {% block content %}
-	<title>ScoreBoard</title>
-	<div class="sBody" style = 'background-color:#ff8787; text-align:center; margin: 5% -2% 10% -2%; border-radius:70px; padding:13%;'>
-		<b style="font-size:300%">ScoreBoard</b>  
+	<style>
+		table
+		{
+			border-collapse: collapse;
+			width: 100%;
+			margin-top: 15%;
+		}
+		th
+		{
+			background-color: #ff6969;
+			color: white;
+			font-size: 330%;
+			border: 1px solid #ff8787;
+			padding: 5%;
+			text-align: center;
+			padding: 25px;
+		}
+		td
+		{
+			background-color: #f8c0c0;
+			font-size: 290%;
+			border: 1px solid #ff8787;
+			text-align: center;
+			font-weight: bold;
+			padding: 25px;
+		}
+	</style>
+	<title>Who Knows Me Better - ScoreBoard</title>
+	<div class="sBody" style = 'text-align:center; margin: 5% -2% 10% -2%; border-radius:70px; padding:13%;'>
+		<b style="font-size:450%">ScoreBoard</b> 
+		<table>
+			<tr>
+				<th>Name</th>
+				<th>Score out of {{ outOfScore }}</th>
+			</tr>
+			{% for i in range(scoreLen) %}
+				<tr>
+					<td>{{ playerNames[i] }}</td>
+					<td>{{ playerScores[i] }}</td>
+				</tr>
+			{% endfor %}
+		</table> 
 	</div>
-	<ol style="font-size:300%">
-		{% for qa in QAs %}
-			<li><h1>{{ qa.questions }}</h1></li>
-				<ol>
-				<li><h2>{{ qa.option1 }}</h2></li>
-				<li><h2>{{ qa.option2 }}</h2></li>
-				<li><h2>{{ qa.option3 }}</h2></li>
-				<li><h2>{{ qa.option4 }}</h2></li>
-				</ol>
-				<br>
-		{% endfor %}
-	</ol>
-	<a href="{{ url_for('logout') }}"><input class="btn" style="width:85%; margin-left: 7%;" type="button" value="Create your Own Quiz"></a>
+	
+	{% if  current_user.is_authenticated %}
+		<h3 style="text-align: center; margin-bottom:5%; margin-top: 20%;">Copy link below and Send it to your friends to play your quiz : </h3>
+		<input class="userName" style="height: 5%;;margin-left: 11%; font-size: 300%; margin-bottom: 15%;" type="text" value="https://who-knows-me-better.herokuapp.com/player/{{ _UID }}">
+		<a href="{{ url_for('logout') }}"><input class="btn" style="margin-top: 0%;width:85%; margin-left: 7%;" type="button" value="Create New Quiz"></a>
+		<h3 style="color:#ff3434; text-align: center; margin-bottom:5%;">Note : if you press on Create new button your current data will be deleted so please <div style="color: #bd0404;">copy and save this page url</div> to check the scoreboard later.</h3>
+	{% else %}
+		<a href="{{ url_for('logout') }}"><input class="btn" style="width:85%; margin-left: 7%;" type="button" value="Create your Own Quiz"></a>
+	{% endif %}
 {% endblock content %}

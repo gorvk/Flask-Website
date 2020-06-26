@@ -54,6 +54,7 @@ header
 .userName::placeholder
 {
     text-align: center;
+    color: rgba(0, 0, 0, 0.315);
 }
 .btn
 {
@@ -64,6 +65,7 @@ header
     background-color: brown;
     color: white;
     font-size: 300%;
-    font-family: cursive;
     font-weight: bold;
+    border-radius: 100px;
+    outline: none;
 }

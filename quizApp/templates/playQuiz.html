@@ -2,21 +2,49 @@
 
 {% block content %}
 	<style>
-		[type=radio]
+		.container 
 		{
-			width: 60px;
-			height: 60px;
-			margin-top:15%;
-			margin-left: -10%;
+			display: block;
+			position: relative;
+			padding-left: 35px;
+			margin-top: 60px;
+			margin-left: -13%;
+			padding-right: 0%;
+			padding-top: 7%;
+			font-size: 94%;
+			height: 3%;
+			border: 5px solid red;
+			border-radius: 50px;
+		}
+		.container input[type = radio] 
+		{
+			opacity: 0;
+		}
+		.checkmark
+		{
+			position: absolute;
+			top: -5%;
+			left: 0;
+			height: 25px;
+			width: 25px;
+			border-radius: 0%;
+		}
+		input:checked ~ .checkmark {
+		background-color: #ff000054;
+		width: 100%;
+		height: 108%;
+		border-radius: 50px;
+		}
+		label
+		{
+			padding: 8% 16% 7% 17%;
+			margin-left: -13%
 		}
 	</style>
-	<div class="sBody" style = 'background-color:#ff8787; text-align:center; margin: 5% -2% 10% -2%; border-radius:70px; padding:13%;'>
-	<b style="font-size:300%">ScoreBoard</b>  
-	</div>
-	<title>Play Quiz page</title>
+	<title>Who Knows Me Better - Play Quiz </title>
+	<h2 style="text-align: center; font-size: 450%; margin-left:-8%; margin-right:-8%; background-color: #8000003b;padding: 5%;">Choose the Answer for following</h2>
 	<form method="POST" action="">
 		{{ form.hidden_tag() }}
-		<input type="text" class="username" placeholder="Enter Your Name" style="text-align: center;">
 		<ol style="font-size:300%">
 			{% for i in range(nQA) %}
 			<li>
@@ -24,10 +52,10 @@
 			</li>
 			<ol>
 				<div>
-					<li style="list-style-type: none;"><input type="radio" name="{{ i }}" value="1"><b>{{ qa[i].option1 }}</b></li>
-					<li style="list-style-type: none;"><input type="radio" name="{{ i }}" value="2"><b>{{ qa[i].option2 }}</b></li>
-					<li style="list-style-type: none;"><input type="radio" name="{{ i }}" value="3"><b>{{ qa[i].option3 }}</b></li>
-					<li style="list-style-type: none;"><input type="radio" name="{{ i }}" value="4"><b>{{ qa[i].option4 }}</b></li>
+					<label class="container" for="{{ i }} option1"><input id="{{ i }} option1" type="radio" name="{{ i }}" value="1" required><b>{{ qa[i].option1 }}</b><span class="checkmark"></span></label>
+					<label class="container" for="{{ i }} option2"><input id="{{ i }} option2" type="radio" name="{{ i }}" value="2" required><b>{{ qa[i].option2 }}</b><span class="checkmark"></span></label>
+					<label class="container" for="{{ i }} option3"><input id="{{ i }} option3" type="radio" name="{{ i }}" value="3" required><b>{{ qa[i].option3 }}</b><span class="checkmark"></span></label>
+					<label class="container" for="{{ i }} option4"><input id="{{ i }} option4" type="radio" name="{{ i }}" value="4" required><b>{{ qa[i].option4 }}</b><span class="checkmark"></span></label>
 				</div>
 			</ol>	
 			{% endfor %}
