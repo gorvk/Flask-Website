@@ -47,7 +47,7 @@
 	
 	{% if  current_user.is_authenticated %}
 		<h3 style="text-align: center; margin-bottom:5%; margin-top: 20%;">Copy link below and Send it to your friends to play your quiz : </h3>
-		<input class="userName" style="height: 5%;;margin-left: 11%; font-size: 300%; margin-bottom: 15%;" type="text" value="https://who-knows-me-better.herokuapp.com/player/{{ _UID }}">
+		<input class="userName" style="height: 5%;;margin-left: 11%; font-size: 300%; margin-bottom: 15%;" type="text" value="localhost:5000/player/{{ _UID }}">
 		<a href="{{ url_for('logout') }}"><input class="btn" style="margin-top: 0%;width:85%; margin-left: 7%;" type="button" value="Create New Quiz"></a>
 		<h3 style="color:#ff3434; text-align: center; margin-bottom:5%;">Note : if you press on Create new button your current data will be deleted so please <div style="color: #bd0404;">copy and save this page url</div> to check the scoreboard later.</h3>
 	{% else %}
