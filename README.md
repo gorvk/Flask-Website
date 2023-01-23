@@ -3,7 +3,7 @@
 
 *  ### Project tree structure
 <br>
-<img src="./README_imgs/projectTree.png" style="margin-right:50%;">
+![projectTree](https://user-images.githubusercontent.com/52004037/214096526-a6624f6d-26e6-4a70-b80e-267b159a3b42.png)
 <br>
 
 Create <b>__init__.py</b> file inside a folder with name <b>quizApp</b> and then initialize and configure our application such as creating instance of <b>Flask</b>, <b>SQLAlchemy</b>, <b>LoginManager</b> classes and configure them and finally importing routes from routes.py as shown below.
@@ -64,8 +64,8 @@ There are other routes such as <b>ownQue</b>, <b>readyMadeQue</b>, <b>shareQuiz<
 <br>
 <br>
 
-<img src="./README_imgs/ssTemplates.png" style="margin-right:55%;">
-<img src="./README_imgs/ssStatic.png" style="margin-right:55%;">
+![ssTemplates](https://user-images.githubusercontent.com/52004037/214096637-01d71147-6a8f-4476-bd86-0fafff14c1d9.png)
+![ssStatic](https://user-images.githubusercontent.com/52004037/214096665-1283e36e-16eb-45e9-81ea-fba39a74b005.png)
 <br>
 Now let’s create <b>WTForms</b> for our Applications so that we can take user inputs and store it in our database. For creating <b>WTForms</b> lets first create <b>form.py</b> inside the same directory as <b>__init__.py</b> and <b>routes.py</b> file as shown in <i>Project Tree</i>. Inside of <b>form.py</b> lets create all the forms classes by inheriting the <b>FlaskForm</b> class form <b>flask_wtf</b> module and make instance of <b>wtforms</b> classes as field for our forms.
 <br>
@@ -144,9 +144,3 @@ After successfully creating our database file now we are ready to run our Applic
 I have also hosted this application online you can check it by visiting below link of our Web Application.
 
 https://who-knows-me-better.herokuapp.com
-
-
-
-```python
-
-```
