@@ -1,10 +1,6 @@
 # Quiz Web Application in Flask
-<br>
 
-*  ### Project tree structure
-<br>
-![projectTree](https://user-images.githubusercontent.com/52004037/214096526-a6624f6d-26e6-4a70-b80e-267b159a3b42.png)
-<br>
+### How to setup project :
 
 Create <b>__init__.py</b> file inside a folder with name <b>quizApp</b> and then initialize and configure our application such as creating instance of <b>Flask</b>, <b>SQLAlchemy</b>, <b>LoginManager</b> classes and configure them and finally importing routes from routes.py as shown below.
 
